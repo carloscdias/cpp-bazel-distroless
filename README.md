@@ -12,7 +12,7 @@ You can have this multiple stage Dockerfile on the root directory of your projec
 FROM carlosdias/cpp-bazel-distroless:1.0 as builder
 RUN bazel --output_user_root=output build --compilation_mode=opt :target
 FROM gcr.io/distroless/cc
-COPY --from=build-env /app/bazel-bin/target /app/target
+COPY --from=builder /app/bazel-bin/target /app/target
 CMD ["/app/target"]
 ```
 
